@@ -1,8 +1,12 @@
 <?php
-// use DEVE estar no escopo global (topo do arquivo, fora de qualquer bloco)
-require_once __DIR__ . '/vendor/phpmailer/src/Exception.php';
-require_once __DIR__ . '/vendor/phpmailer/src/PHPMailer.php';
-require_once __DIR__ . '/vendor/phpmailer/src/SMTP.php';
+// ── Carregar PHPMailer se disponível (não está no Git — upload via FTP) ──
+$phpmailer_available = file_exists(__DIR__ . '/vendor/phpmailer/src/PHPMailer.php');
+
+if ($phpmailer_available) {
+    require_once __DIR__ . '/vendor/phpmailer/src/Exception.php';
+    require_once __DIR__ . '/vendor/phpmailer/src/PHPMailer.php';
+    require_once __DIR__ . '/vendor/phpmailer/src/SMTP.php';
+}
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -34,59 +38,80 @@ if ($is_ajax) {
         exit;
     }
 
-    $mail = new PHPMailer(true);
-    try {
-        $mail->isSMTP();
-        $mail->Host       = MAIL_HOST;
-        $mail->SMTPAuth   = true;
-        $mail->Username   = MAIL_USERNAME;
-        $mail->Password   = MAIL_PASSWORD;
-        $mail->SMTPSecure = MAIL_ENCRYPTION === 'ssl'
-                            ? PHPMailer::ENCRYPTION_SMTPS
-                            : PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = MAIL_PORT;
-        $mail->CharSet    = 'UTF-8';
-        $mail->Timeout    = 15;
+    $assunto = $subject
+        ? "[{$subject}] Contato via site – {$name}"
+        : "Contato via site – {$name}";
 
-        $mail->setFrom(MAIL_FROM, MAIL_FROM_NAME);
-        $mail->addReplyTo($email, $name);
-        $mail->addAddress(MAIL_TO, SITE_NAME);
+    $corpo_texto = "Nome: {$name}\nE-mail: {$email}\nTelefone: {$phone}\nServiço: {$subject}\n\nMensagem:\n{$message}";
 
-        $assunto = $subject
-            ? "[{$subject}] Contato via site – {$name}"
-            : "Contato via site – {$name}";
-        $mail->Subject = $assunto;
-        $mail->isHTML(true);
-        $mail->Body = "
-        <div style='font-family:Arial,sans-serif;max-width:600px;margin:0 auto;'>
-            <div style='background:#13434d;padding:20px 28px;border-radius:8px 8px 0 0;'>
-                <h2 style='color:#58acac;margin:0;font-size:1.2rem;'>Nova mensagem via site</h2>
-                <p style='color:rgba(255,255,255,.7);margin:4px 0 0;font-size:.85rem;'>Pontual Engenharia</p>
-            </div>
-            <div style='background:#f7f7f5;padding:28px;border-radius:0 0 8px 8px;'>
-                <table style='width:100%;border-collapse:collapse;'>
-                    <tr><td style='padding:8px 0;color:#5a7a7d;width:120px;'><strong>Nome</strong></td>
-                        <td style='padding:8px 0;color:#1c2e30;'>" . htmlspecialchars($name) . "</td></tr>
-                    <tr><td style='padding:8px 0;color:#5a7a7d;'><strong>E-mail</strong></td>
-                        <td><a href='mailto:" . htmlspecialchars($email) . "' style='color:#178a8d;'>" . htmlspecialchars($email) . "</a></td></tr>
-                    <tr><td style='padding:8px 0;color:#5a7a7d;'><strong>Telefone</strong></td>
-                        <td style='color:#1c2e30;'>" . (empty($phone) ? '–' : htmlspecialchars($phone)) . "</td></tr>
-                    <tr><td style='padding:8px 0;color:#5a7a7d;'><strong>Serviço</strong></td>
-                        <td style='color:#1c2e30;'>" . (empty($subject) ? '–' : htmlspecialchars($subject)) . "</td></tr>
-                </table>
-                <hr style='border:none;border-top:1px solid #e5e7eb;margin:16px 0;'>
-                <p style='color:#5a7a7d;margin:0 0 8px;'><strong>Mensagem:</strong></p>
-                <p style='color:#1c2e30;line-height:1.7;white-space:pre-wrap;'>" . htmlspecialchars($message) . "</p>
-            </div>
-        </div>";
-        $mail->AltBody = "Nome: {$name}\nE-mail: {$email}\nTelefone: {$phone}\nServiço: {$subject}\n\nMensagem:\n{$message}";
+    if ($phpmailer_available && file_exists(__DIR__ . '/includes/mail_config.php')) {
+        // ── Envio via PHPMailer (SMTP) ──────────────────────
+        require_once __DIR__ . '/includes/mail_config.php';
 
-        $mail->send();
-        echo json_encode(['success' => true, 'message' => 'Mensagem enviada com sucesso! Entraremos em contato em breve.']);
+        $mail = new PHPMailer(true);
+        try {
+            $mail->isSMTP();
+            $mail->Host       = MAIL_HOST;
+            $mail->SMTPAuth   = true;
+            $mail->Username   = MAIL_USERNAME;
+            $mail->Password   = MAIL_PASSWORD;
+            $mail->SMTPSecure = MAIL_ENCRYPTION === 'ssl'
+                                ? PHPMailer::ENCRYPTION_SMTPS
+                                : PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port       = MAIL_PORT;
+            $mail->CharSet    = 'UTF-8';
+            $mail->Timeout    = 15;
 
-    } catch (Exception $e) {
-        error_log('PHPMailer: ' . $mail->ErrorInfo);
-        echo json_encode(['success' => false, 'message' => 'Erro ao enviar. Por favor, tente pelo WhatsApp ou e-mail diretamente.']);
+            $mail->setFrom(MAIL_FROM, MAIL_FROM_NAME);
+            $mail->addReplyTo($email, $name);
+            $mail->addAddress(MAIL_TO, SITE_NAME);
+            $mail->Subject = $assunto;
+            $mail->isHTML(true);
+            $mail->Body = "
+            <div style='font-family:Arial,sans-serif;max-width:600px;margin:0 auto;'>
+                <div style='background:#13434d;padding:20px 28px;border-radius:8px 8px 0 0;'>
+                    <h2 style='color:#58acac;margin:0;font-size:1.2rem;'>Nova mensagem via site</h2>
+                    <p style='color:rgba(255,255,255,.7);margin:4px 0 0;font-size:.85rem;'>Pontual Engenharia</p>
+                </div>
+                <div style='background:#f7f7f5;padding:28px;border-radius:0 0 8px 8px;'>
+                    <table style='width:100%;border-collapse:collapse;'>
+                        <tr><td style='padding:8px 0;color:#5a7a7d;width:120px;'><strong>Nome</strong></td>
+                            <td style='padding:8px 0;color:#1c2e30;'>" . htmlspecialchars($name) . "</td></tr>
+                        <tr><td style='padding:8px 0;color:#5a7a7d;'><strong>E-mail</strong></td>
+                            <td><a href='mailto:" . htmlspecialchars($email) . "' style='color:#178a8d;'>" . htmlspecialchars($email) . "</a></td></tr>
+                        <tr><td style='padding:8px 0;color:#5a7a7d;'><strong>Telefone</strong></td>
+                            <td style='color:#1c2e30;'>" . (empty($phone) ? '–' : htmlspecialchars($phone)) . "</td></tr>
+                        <tr><td style='padding:8px 0;color:#5a7a7d;'><strong>Serviço</strong></td>
+                            <td style='color:#1c2e30;'>" . (empty($subject) ? '–' : htmlspecialchars($subject)) . "</td></tr>
+                    </table>
+                    <hr style='border:none;border-top:1px solid #e5e7eb;margin:16px 0;'>
+                    <p style='color:#5a7a7d;margin:0 0 8px;'><strong>Mensagem:</strong></p>
+                    <p style='color:#1c2e30;line-height:1.7;white-space:pre-wrap;'>" . htmlspecialchars($message) . "</p>
+                </div>
+            </div>";
+            $mail->AltBody = $corpo_texto;
+
+            $mail->send();
+            echo json_encode(['success' => true, 'message' => 'Mensagem enviada com sucesso! Entraremos em contato em breve.']);
+
+        } catch (Exception $e) {
+            error_log('PHPMailer: ' . $mail->ErrorInfo);
+            echo json_encode(['success' => false, 'message' => 'Erro ao enviar. Por favor, tente pelo WhatsApp ou e-mail diretamente.']);
+        }
+
+    } else {
+        // ── Fallback: mail() nativo (Hostinger suporta) ──────
+        require_once __DIR__ . '/includes/config.php';
+        $headers  = "From: " . SITE_NAME . " <" . SITE_EMAIL . ">\r\n";
+        $headers .= "Reply-To: {$email}\r\n";
+        $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+
+        $sent = @mail(SITE_EMAIL, $assunto, $corpo_texto, $headers);
+        if ($sent) {
+            echo json_encode(['success' => true, 'message' => 'Mensagem enviada com sucesso! Entraremos em contato em breve.']);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Erro ao enviar. Por favor, tente pelo WhatsApp ou e-mail diretamente.']);
+        }
     }
     exit;
 }
