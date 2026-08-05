@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 80" width="160" height="80">
+  <rect width="160" height="80" fill="#f5c000" rx="6"/>
+  <!-- Dois triângulos / montanhas estilizadas -->
+  <polygon points="22,58 38,28 54,58" fill="#2e7d32"/>
+  <polygon points="34,58 54,22 74,58" fill="#1b5e20"/>
+  <!-- Texto -->
+  <text x="110" y="38" font-family="Arial Black, sans-serif" font-size="16" font-weight="900"
+        text-anchor="middle" fill="#1a1a1a" letter-spacing="1">RIO</text>
+  <text x="110" y="58" font-family="Arial Black, sans-serif" font-size="16" font-weight="900"
+        text-anchor="middle" fill="#2e7d32" letter-spacing="1">SUL</text>
+</svg>

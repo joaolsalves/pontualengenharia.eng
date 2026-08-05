@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 80" width="160" height="80">
+  <!-- Estrela decorativa -->
+  <polygon points="80,8 83,18 94,18 85,24 88,35 80,28 72,35 75,24 66,18 77,18"
+           fill="#c8a951"/>
+  <text x="80" y="56" font-family="Georgia, serif" font-size="26" font-weight="700"
+        text-anchor="middle" fill="#1a1a1a" letter-spacing="2">AMI<tspan fill="#c8a951">GOLD</tspan></text>
+  <text x="80" y="72" font-family="Arial, sans-serif" font-size="9"
+        text-anchor="middle" fill="#888" letter-spacing="2">www.amigold.com.br</text>
+</svg>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Fundo arredondado #13434d -->
+  <rect width="100" height="100" rx="20" ry="20" fill="#13434d"/>
+
+  <!-- Haste vertical do P -->
+  <rect x="22" y="18" width="13" height="64" rx="6" fill="#58acac"/>
+
+  <!-- Arco externo do P (círculo) -->
+  <circle cx="54" cy="42" r="26" fill="none" stroke="#58acac" stroke-width="13"/>
+
+  <!-- Corte do arco (parte inferior direita — abre o P) -->
+  <rect x="54" y="54" width="34" height="30" fill="#13434d"/>
+  <rect x="28" y="54" width="12" height="30" fill="#13434d"/>
+
+  <!-- Círculo interno (manômetro) -->
+  <circle cx="54" cy="42" r="13" fill="none" stroke="#178a8d" stroke-width="2.5"/>
+
+  <!-- Ponteiro (linha vertical de cima) -->
+  <line x1="54" y1="30" x2="54" y2="42" stroke="#f7f7f5" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Ponto central -->
+  <circle cx="54" cy="43" r="3.5" fill="#13434d"/>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 80" width="160" height="80">
+  <!-- R estilizado -->
+  <text x="18" y="62" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="700"
+        fill="#1a1a1a" font-style="italic">R</text>
+  <!-- Linha divisória vertical -->
+  <line x1="62" y1="14" x2="62" y2="66" stroke="#cccccc" stroke-width="1"/>
+  <!-- Texto ROCCO -->
+  <text x="90" y="42" font-family="Arial, sans-serif" font-size="20" font-weight="700"
+        text-anchor="middle" fill="#1a1a1a" letter-spacing="3">ROCCO</text>
+  <text x="90" y="58" font-family="Arial, sans-serif" font-size="9" font-weight="400"
+        text-anchor="middle" fill="#888" letter-spacing="2">EDITORA</text>
+</svg>

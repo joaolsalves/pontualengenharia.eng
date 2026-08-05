@@ -1,0 +1,22 @@
+# Credenciais — NUNCA versionar
+includes/mail_config.php
+
+# Diagnóstico (remover antes de subir)
+diagnostico.php
+
+# Dependências (subir via FTP, não Git)
+vendor/
+
+# Cache e logs
+*.log
+*.cache
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp

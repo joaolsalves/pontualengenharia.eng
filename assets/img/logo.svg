@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="320" height="80">
+  <!-- Ícone: fundo arredondado -->
+  <rect x="0" y="4" width="72" height="72" rx="14" ry="14" fill="#13434d"/>
+
+  <!-- Haste vertical do P -->
+  <rect x="14" y="10" width="11" height="56" rx="5" fill="#58acac"/>
+
+  <!-- Arco externo (corpo do P) -->
+  <path d="M25,10 Q60,10 60,36 Q60,62 25,62" fill="none" stroke="#58acac" stroke-width="11" stroke-linecap="round"/>
+
+  <!-- Círculo interno manômetro -->
+  <circle cx="43" cy="36" r="11" fill="none" stroke="#178a8d" stroke-width="2.2"/>
+
+  <!-- Ponteiro -->
+  <line x1="43" y1="26" x2="43" y2="36" stroke="#f7f7f5" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Ponto central -->
+  <circle cx="43" cy="37" r="2.8" fill="#13434d"/>
+
+  <!-- Texto PONTUAL -->
+  <text x="84" y="36"
+        font-family="Montserrat, Arial, sans-serif"
+        font-size="26"
+        font-weight="800"
+        letter-spacing="1"
+        fill="#13434d">PONTUAL</text>
+
+  <!-- Texto ENGENHARIA -->
+  <text x="84" y="56"
+        font-family="Montserrat, Arial, sans-serif"
+        font-size="14"
+        font-weight="600"
+        letter-spacing="4"
+        fill="#178a8d">ENGENHARIA</text>
+
+  <!-- Slogan -->
+  <text x="84" y="72"
+        font-family="Montserrat, Arial, sans-serif"
+        font-size="8.5"
+        font-weight="600"
+        letter-spacing="2"
+        fill="#58acac">PRECISÃO QUE CONSTRÓI CONFIANÇA</text>
+</svg>

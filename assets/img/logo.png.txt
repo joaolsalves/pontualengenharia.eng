@@ -1,0 +1,4 @@
+Salve a imagem da logo aqui com o nome:
+  logo.png       (versão original – usada no header)
+  logo-light.png (opcional – versão branca para o footer;
+                  se não existir, o CSS aplica filter:invert automaticamente)

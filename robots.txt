@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /includes/
+Allow: /
+
+Sitemap: https://www.pontualengenharia.com.br/sitemap.xml
