@@ -35,7 +35,9 @@ $b = BASE_URL; // shorthand
     <title><?= isset($page_title) ? htmlspecialchars($page_title) . ' | ' . SITE_NAME : SITE_NAME ?></title>
     <link rel="icon"             type="image/x-icon" href="<?= $b ?>/assets/img/favicon.ico">
     <link rel="shortcut icon"    type="image/x-icon" href="<?= $b ?>/assets/img/favicon.ico">
-    <link rel="icon"             type="image/png"    href="<?= $b ?>/assets/img/logo.png">
+    <link rel="icon"             type="image/png" sizes="512x512" href="<?= $b ?>/assets/img/logo.png">
+    <link rel="icon"             type="image/png" sizes="32x32"   href="<?= $b ?>/assets/img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="512x512"     href="<?= $b ?>/assets/img/logo.png">
     <link rel="apple-touch-icon" sizes="180x180"     href="<?= $b ?>/assets/img/logo.png">
     <!-- /Favicon -->
 
@@ -69,15 +71,18 @@ $b = BASE_URL; // shorthand
     {
         "@context": "https://schema.org",
         "@type": ["Organization", "ProfessionalService"],
+        "@id": "<?= SITE_URL ?>/#organization",
         "name": "<?= SITE_NAME ?>",
         "alternateName": "Pontual Engenharia e Construção",
         "description": "<?= SITE_SLOGAN ?>",
-        "url": "<?= SITE_URL ?>",
+        "url": "<?= SITE_URL ?>/",
         "telephone": "<?= SITE_PHONE ?>",
         "email": "<?= SITE_EMAIL ?>",
         "logo": {
             "@type": "ImageObject",
+            "@id": "<?= SITE_URL ?>/#logo",
             "url": "<?= SITE_URL ?>/assets/img/logo.png",
+            "contentUrl": "<?= SITE_URL ?>/assets/img/logo.png",
             "width": 512,
             "height": 512,
             "caption": "<?= SITE_NAME ?>"
@@ -86,8 +91,7 @@ $b = BASE_URL; // shorthand
             "@type": "ImageObject",
             "url": "<?= SITE_URL ?>/assets/img/logonomeslogam.png",
             "width": 1200,
-            "height": 630,
-            "caption": "<?= SITE_NAME ?> – <?= SITE_SLOGAN ?>"
+            "height": 630
         },
         "address": {
             "@type": "PostalAddress",
