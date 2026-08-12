@@ -62,7 +62,7 @@ if ($is_ajax) {
             $mail->CharSet    = 'UTF-8';
             $mail->Timeout    = 15;
 
-            $mail->setFrom(MAIL_FROM, MAIL_FROM_NAME);
+            $mail->setFrom(MAIL_FROM, $name . ' via ' . SITE_NAME);
             $mail->addReplyTo($email, $name);
             $mail->addAddress(MAIL_TO, SITE_NAME);
             $mail->Subject = $assunto;
@@ -102,8 +102,8 @@ if ($is_ajax) {
     } else {
         // ── Fallback: mail() nativo (Hostinger suporta) ──────
         require_once __DIR__ . '/includes/config.php';
-        $headers  = "From: " . SITE_NAME . " <" . SITE_EMAIL . ">\r\n";
-        $headers .= "Reply-To: {$email}\r\n";
+        $headers  = "From: {$name} via " . SITE_NAME . " <" . SITE_EMAIL . ">\r\n";
+        $headers .= "Reply-To: {$name} <{$email}>\r\n";
         $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
         $sent = @mail(SITE_EMAIL, $assunto, $corpo_texto, $headers);
