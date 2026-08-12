@@ -66,18 +66,20 @@ $b = BASE_URL; // shorthand
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'" crossorigin="anonymous">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
 
-    <!-- Schema.org JSON-LD -->
+    <!-- Schema.org JSON-LD — Organization -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": ["Organization", "ProfessionalService"],
+        "@type": "Organization",
         "@id": "<?= SITE_URL ?>/#organization",
         "name": "<?= SITE_NAME ?>",
+        "legalName": "Pontual Engenharia e Construção",
         "alternateName": "Pontual Engenharia e Construção",
-        "description": "<?= SITE_SLOGAN ?>",
+        "description": "Empresa especializada em engenharia civil, construção, gerenciamento de obras, instalações elétricas e hidráulicas, climatização, SPDA e manutenção predial no Rio de Janeiro.",
         "url": "<?= SITE_URL ?>/",
-        "telephone": "<?= SITE_PHONE ?>",
+        "telephone": "+55<?= preg_replace('/\D/', '', SITE_PHONE) ?>",
         "email": "<?= SITE_EMAIL ?>",
+        "foundingDate": "2010",
         "logo": {
             "@type": "ImageObject",
             "@id": "<?= SITE_URL ?>/#logo",
@@ -85,19 +87,23 @@ $b = BASE_URL; // shorthand
             "contentUrl": "<?= SITE_URL ?>/assets/img/logo.png",
             "width": 512,
             "height": 512,
-            "caption": "<?= SITE_NAME ?>"
+            "caption": "<?= SITE_NAME ?> – Logo"
         },
-        "image": {
-            "@type": "ImageObject",
-            "url": "<?= SITE_URL ?>/assets/img/logonomeslogam.png",
-            "width": 1200,
-            "height": 630
-        },
+        "image": "<?= SITE_URL ?>/assets/img/logo.png",
         "address": {
             "@type": "PostalAddress",
+            "streetAddress": "Rio de Janeiro",
             "addressLocality": "Rio de Janeiro",
             "addressRegion": "RJ",
+            "postalCode": "20000-000",
             "addressCountry": "BR"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+55<?= preg_replace('/\D/', '', SITE_PHONE) ?>",
+            "contactType": "customer service",
+            "availableLanguage": "Portuguese",
+            "areaServed": "BR"
         },
         "openingHoursSpecification": {
             "@type": "OpeningHoursSpecification",
@@ -105,35 +111,51 @@ $b = BASE_URL; // shorthand
             "opens": "08:00",
             "closes": "18:00"
         },
-        "priceRange": "$$",
         "areaServed": [
-            {"@type": "City", "name": "Rio de Janeiro",  "containedInPlace": {"@type": "State", "name": "Rio de Janeiro"}},
-            {"@type": "City", "name": "Magé",            "containedInPlace": {"@type": "State", "name": "Rio de Janeiro"}},
-            {"@type": "City", "name": "Duque de Caxias", "containedInPlace": {"@type": "State", "name": "Rio de Janeiro"}},
-            {"@type": "City", "name": "Guapimirim",      "containedInPlace": {"@type": "State", "name": "Rio de Janeiro"}},
-            {"@type": "City", "name": "Petrópolis",      "containedInPlace": {"@type": "State", "name": "Rio de Janeiro"}},
-            {"@type": "City", "name": "Teresópolis",     "containedInPlace": {"@type": "State", "name": "Rio de Janeiro"}},
-            {"@type": "City", "name": "Angra dos Reis",  "containedInPlace": {"@type": "State", "name": "Rio de Janeiro"}},
-            {"@type": "City", "name": "Rio Claro",       "containedInPlace": {"@type": "State", "name": "Rio de Janeiro"}},
-            {"@type": "City", "name": "Barra Mansa",     "containedInPlace": {"@type": "State", "name": "Rio de Janeiro"}}
+            {"@type": "City", "name": "Rio de Janeiro"},
+            {"@type": "City", "name": "Duque de Caxias"},
+            {"@type": "City", "name": "Magé"},
+            {"@type": "City", "name": "Guapimirim"},
+            {"@type": "City", "name": "Petrópolis"},
+            {"@type": "City", "name": "Teresópolis"},
+            {"@type": "City", "name": "Angra dos Reis"},
+            {"@type": "City", "name": "Rio Claro"},
+            {"@type": "City", "name": "Barra Mansa"}
         ],
-        "hasOfferCatalog": {
-            "@type": "OfferCatalog",
-            "name": "Serviços de Engenharia",
-            "itemListElement": [
-                {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Construções em Geral"}},
-                {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Gerenciamento de Obras"}},
-                {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Projetos de Engenharia"}},
-                {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Instalações Elétricas"}},
-                {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Instalações Hidráulicas"}},
-                {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Climatização"}},
-                {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "SPDA"}},
-                {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Manutenção Predial"}}
-            ]
-        },
         "sameAs": [
-            "https://wa.me/<?= SITE_WHATSAPP ?>"
+            "https://wa.me/<?= SITE_WHATSAPP ?>",
+            "https://github.com/joaolsalves/pontualengenharia.eng"
         ]
+    }
+    </script>
+
+    <!-- Schema.org JSON-LD — WebSite (para Search Box e associação com Organization) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "<?= SITE_URL ?>/#website",
+        "url": "<?= SITE_URL ?>/",
+        "name": "<?= SITE_NAME ?>",
+        "description": "<?= SITE_SLOGAN ?>",
+        "publisher": {
+            "@id": "<?= SITE_URL ?>/#organization"
+        },
+        "inLanguage": "pt-BR"
+    }
+    </script>
+
+    <!-- Schema.org JSON-LD — WebPage (página atual) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": "<?= htmlspecialchars($canonical_url) ?>#webpage",
+        "url": "<?= htmlspecialchars($canonical_url) ?>",
+        "name": "<?= isset($page_title) ? htmlspecialchars($page_title) . ' | ' . SITE_NAME : SITE_NAME ?>",
+        "isPartOf": {"@id": "<?= SITE_URL ?>/#website"},
+        "about": {"@id": "<?= SITE_URL ?>/#organization"},
+        "inLanguage": "pt-BR"
     }
     </script>
 </head>

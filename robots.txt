@@ -1,5 +1,13 @@
 User-agent: *
 Disallow: /includes/
+Disallow: /vendor/
+Allow: /assets/
 Allow: /
 
+# Permitir explicitamente o logo para o Googlebot
+User-agent: Googlebot-Image
+Allow: /assets/img/logo.png
+Allow: /assets/img/logonomeslogam.png
+
+# Sitemap — atualizar para o domínio real após publicação
 Sitemap: https://www.pontualengenharia.com.br/sitemap.xml
