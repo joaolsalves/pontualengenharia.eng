@@ -8,6 +8,18 @@ $b = BASE_URL; // shorthand
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Analytics 4 (GA4) -->
+    <?php if (defined('GA_MEASUREMENT_ID') && GA_MEASUREMENT_ID !== ''): ?>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=<?= GA_MEASUREMENT_ID ?>"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '<?= GA_MEASUREMENT_ID ?>');
+    </script>
+    <?php endif; ?>
+
     <meta name="description" content="<?= isset($meta_description) ? htmlspecialchars($meta_description) : 'Pontual Engenharia – soluções em engenharia, construção civil, manutenção predial e instalações em Rio de Janeiro, Duque de Caxias, Petrópolis, Teresópolis e região.' ?>">
     <meta name="keywords" content="engenharia Rio de Janeiro, manutenção predial RJ, construção civil, instalações elétricas, instalações hidráulicas, climatização, SPDA, gerenciamento de obras, Magé, Duque de Caxias, Guapimirim, Petrópolis, Teresópolis, Angra dos Reis, Rio Claro, Barra Mansa, engenharia civil RJ, manutenção predial Rio de Janeiro">
     <meta name="robots" content="index, follow">
