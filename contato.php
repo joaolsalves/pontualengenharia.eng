@@ -118,7 +118,7 @@ if ($is_ajax) {
 
 // ── Renderização normal da página ─────────────────────────────
 $page_title       = 'Contato | Orçamento de Engenharia em Rio de Janeiro e Região';
-$meta_description = 'Entre em contato com a Pontual Engenharia. Solicite orçamento de construção, manutenção predial e instalações em Rio de Janeiro, Duque de Caxias, Petrópolis, Teresópolis e mais cidades do RJ.';
+$meta_description = 'Solicite orçamento de engenharia e manutenção predial no RJ. Atendemos Rio de Janeiro, Duque de Caxias, Petrópolis e região. Resposta em 24h.';
 require_once __DIR__ . '/includes/header.php';
 ?>
 

@@ -1,3 +1,3 @@
 git add -A
-git commit -m "Google Analytics - Ajuste do config.php"
+git commit -m "Correção - Ajuste no robots.txt apontando para domínio errado"
 git push origin main
