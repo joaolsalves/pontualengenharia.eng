@@ -27,7 +27,7 @@ define('SITE_STATE',     'RJ');
 define('SITE_SLOGAN',    'Precisão que Constrói Confiança');
 
 // Google Analytics 4 — coloque seu Measurement ID aqui (ex: 'G-XXXXXXXXXX')
-define('GA_MEASUREMENT_ID', 'G-D9K4WX46CE');
+define('GA_MEASUREMENT_ID', 'G-BMDYD1MH3Z');
 
 // Cidades de atuação — usadas no SEO local
 define('SITE_CITIES', 'Rio de Janeiro, Magé, Duque de Caxias, Guapimirim, Petrópolis, Teresópolis, Angra dos Reis, Rio Claro, Barra Mansa');
